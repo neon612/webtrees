@@ -26,4 +26,14 @@ interface ModuleReportInterface {
 	 * @return Menu[]
 	 */
 	public function getReportMenus();
+
+	/**
+	 * Configure report options
+	 */
+#	public function setup();
+
+	/**
+	 * Run the report
+	 */
+#	public function run();
 }

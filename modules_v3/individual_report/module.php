@@ -626,16 +626,5 @@ class individual_report_WT_Module extends Report implements ModuleReportInterfac
 				
 			<?php } ?>
 		<?php }
-/*		http://dhenninger.local/dev/webtrees/report.php?
-		action=run&
-		report=individual_report&
-		pid=I1&
-		pid_type=INDI&
-		sources=1&
-		notes=1&
-		photos=highlighted&
-		pageSize=A4&
-		fonts=dejavusans
-*/
 	}
 }

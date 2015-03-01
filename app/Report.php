@@ -407,7 +407,13 @@ abstract class Report extends Module {
 		}
 	}
 
-	/* TODO: PHPDoc String */
+	/**
+	 * This will return the option passed to the report
+	 *
+	 * @param string $value
+	 *
+	 * @return string
+	 */
 	public function get($value) {
 		if (array_key_exists($value, $_GET)) {
 			return $_GET[$value];
@@ -437,7 +443,15 @@ abstract class Report extends Module {
 		}
 	}
 
-	/* TODO: PHPDoc string */
+	/**
+	 * Adds an input to the report configuration page
+	 *
+	 * @param string $name
+	 * @param string $type
+	 * @param string $var
+	 * @param string $lookup
+	 * @param string $default
+	 */
 	public function addInput($name, $type, $var, $lookup = null, $default = null) {
 		$this->inputs[$name] = array(	'var' => I18N::translate($var),
 										'name' => $name,
@@ -447,14 +461,23 @@ abstract class Report extends Module {
 										'options' => null,);
 	}
 
-	/* TODO: PHPDoc String */
+	/**
+	 * Add an option to a select input
+	 */
 	public function addOption($name, $key, $value) {
 		if(array_key_exists($name, $this->inputs)) {
 			$this->inputs[$name]['options'][$key] = $value;
 		}
 	}
 
-	/* TODO: PHPDoc String */
+	/**
+	 * A specific input control
+	 *
+	 * @param string $name
+	 * @param string $default
+	 *
+	 * @return array|null
+	 */
 	public function getInput($name, $default = null) {
 		if (array_key_exists($name, $this->inputs)) {
 			return $this->inputs[$name];
@@ -464,8 +487,15 @@ abstract class Report extends Module {
 		}
 	}
 
-	/* TODO: PHPDoc String */
-	public function showInput($var) {
+	/**
+	 * Use a default input
+	 *
+	 * Some inputs are common, so they are already configured.
+	 * Such as: pageSize, fonts, and colors.
+	 *
+	 * @param string $var
+	 */
+	 public function showInput($var) {
 		switch($var) {
 		case 'pageSize':
 			$this->inputs[$var] =
@@ -504,7 +534,9 @@ abstract class Report extends Module {
 		}
 	}
 
-	/* TODO: PHPDoc String */
+	/**
+	 * Create page with the configured inputs
+	 */
 	private function printInputs() {
 		global $controller;
 
@@ -534,7 +566,11 @@ abstract class Report extends Module {
 		</td></tr></table></form></div>';
 	}
 
-	/* TODO: PHPDoc String */
+	/**
+	 * Print configured input on report configuration page
+	 *
+	 * @param string $name
+	 */
 	private function printInput($name) {
 		global $controller;
 
@@ -619,25 +655,6 @@ abstract class Report extends Module {
 		echo '</td></tr>';
 	}
 
-	/* TODO: PHPDoc String */
-	public function setVar($key, $value) {
-		$this->vars[$key] = $value;
-	}
-
-	/* TODO: PHPDoc String */
-	public function getVar($key) {
-		if (array_key_exists($key, $this->vars)) {
-			return $this->vars[$key];
-		} else {
-			return '';
-		}
-	}
-
-	/* TODO: PHPDoc String */
-	public function getVars() {
-		return $this->vars;
-	}
-
 	/**
 	 * Get the value of chosen level data in the fact
 	 *
@@ -657,7 +674,13 @@ abstract class Report extends Module {
 		return null;
 	}
 
-	/* TODO: PHPDoc String */
+	/**
+	 * Style for displaying certain parts of the report
+	 *
+	 * @param string $type
+	 *
+	 * @return string
+	 */
 	public function getStyle($type) {
 		$html = '';
 
@@ -683,7 +706,14 @@ abstract class Report extends Module {
 		return $html;
 	}
 
-	/* TODO: PHPDoc String */
+	/**
+	 * Style for images in report
+	 *
+	 * @param string $type
+	 * @param int $img
+	 *
+	 * @return string
+	 */
 	public function getImageStyle($type, $img) {
 		$html   = '';
 
@@ -706,6 +736,15 @@ abstract class Report extends Module {
 		return $html;
 	}
 
+	/**
+	 * Footnote information
+	 *
+	 * @param Fact $fact
+	 * @param string $citation
+	 * @param int $level
+	 *
+	 * @return string
+	 */
 	public function getFootnote($fact, $citation=null, $level=1) {
 		$srcstr = '';
 
