@@ -27,6 +27,9 @@ class PageController extends BaseController {
 	private $meta_robots = 'noindex,nofollow'; // Most pages are not intended for robots
 	private $page_title = WT_WEBTREES; // <head><title> $page_title </title></head>
 
+	/** @var string[] Stylesheet file paths */
+	public $stylesheets = array();
+
 	/**
 	 * Startup activity
 	 */

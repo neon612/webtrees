@@ -531,6 +531,10 @@ abstract class BaseTheme {
 		foreach ($this->stylesheets() as $css) {
 			$html .= '<link rel="stylesheet" type="text/css" href="' . $css . '">';
 		}
+		// CSS files - Reports
+		foreach ($controller->stylesheets as $css) {
+			$html .= '<link rel="stylesheet" type="text/css" href="' . $css . '/style.css">';
+		}
 
 		return $html;
 	}

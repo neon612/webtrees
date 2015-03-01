@@ -95,6 +95,7 @@ return array(
     'Fisharebest\\Webtrees\\ReportBasePageheader' => $baseDir . '/app/Report/ReportBasePageheader.php',
     'Fisharebest\\Webtrees\\ReportBaseText' => $baseDir . '/app/Report/ReportBaseText.php',
     'Fisharebest\\Webtrees\\ReportBaseTextbox' => $baseDir . '/app/Report/ReportBaseTextbox.php',
+    'Fisharebest\\Webtrees\\ReportController' => $baseDir . '/app/Controller/ReportController.php',
     'Fisharebest\\Webtrees\\ReportHtml' => $baseDir . '/app/Report/ReportHtml.php',
     'Fisharebest\\Webtrees\\ReportHtmlCell' => $baseDir . '/app/Report/ReportHtmlCell.php',
     'Fisharebest\\Webtrees\\ReportHtmlFootnote' => $baseDir . '/app/Report/ReportHtmlFootnote.php',

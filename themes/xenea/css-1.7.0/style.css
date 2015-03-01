@@ -1285,23 +1285,23 @@ a.showit:hover > span {
 	text-align: right;
 }
 
-/* --- reportengine.php --- */
-#reportengine-page table {
+/* --- report.php --- */
+#report-page table {
 	margin: 20px auto;
 }
 
-#reportengine-page .report-type {
+#report-page .report-type {
 	overflow: hidden;
 	margin: auto;
 	width: 180px;
 }
 
-#reportengine-page .report-type div {
+#report-page .report-type div {
 	float: left;
 	margin: 0 20px;
 }
 
-#reportengine-page .report-type p {
+#report-page .report-type p {
 	margin: 0;
 	text-align: center;
 }
