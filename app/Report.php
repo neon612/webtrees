@@ -23,9 +23,6 @@ abstract class Report extends Module {
 	/** @var string[] Configuration options for the report */
 	private $inputs;
 
-	/** @var string[] Array of variables used in the development of the document */
-	private $vars;
-
 	/** @var float Left Margin (expressed in points) Default: 17.99 mm, 0.7083 inch */
 	private $leftmargin = 51.0;
 
@@ -75,16 +72,12 @@ abstract class Report extends Module {
 	public $finalwidth;
 
 	/** {@inheritdoc} */
-	public function __construct() {
-		parent::__construct();
+	public function __construct($directory) {
+		parent::__construct($directory);
 		$this->pageSize = $this->get('pageSize');
 
 		if ($this->inputs === null) {
 			$this->inputs = array();
-		}
-
-		if ($this->vars === null) {
-			$this->vars = array();
 		}
 
 		// For known size pages
@@ -504,10 +497,10 @@ abstract class Report extends Module {
 						'type' => 'select',
 						'lookup' => null,
 						'default' => 'A4',
-						'options' => array( 'letter' => I18N::translate_c('paper size','Letter'),
-											'A3' => I18N::translate_c('paper size', 'A3'),
-											'A4' => I18N::translate_c('paper size','A4'),
-											'legal' => I18N::translate_c('paper size','Legal')));
+						'options' => array( 'letter' => I18N::translateContext('paper size','Letter'),
+											'A3' => I18N::translateContext('paper size', 'A3'),
+											'A4' => I18N::translateContext('paper size','A4'),
+											'legal' => I18N::translateContext('paper size','Legal')));
 			break;
 
 		case 'fonts':
@@ -517,9 +510,9 @@ abstract class Report extends Module {
 						'type' => 'select',
 						'lookup' => null,
 						'default' => 'dejavusans',
-						'options' => array( 'arialunicid0' => I18N::translate_c('font name', 'Arial'),
-											'dejavusans' => I18N::translate_c('font name', 'DejaVu'),
-											'helvetica' => I18N::translate_c('font name', 'Helvetica')));
+						'options' => array( 'arialunicid0' => I18N::translateContext('font name', 'Arial'),
+											'dejavusans' => I18N::translateContext('font name', 'DejaVu'),
+											'helvetica' => I18N::translateContext('font name', 'Helvetica')));
 			break;
 
 		case 'colors':

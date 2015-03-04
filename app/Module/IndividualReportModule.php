@@ -17,9 +17,9 @@ namespace Fisharebest\Webtrees;
  */
 
 /**
- * Class individual_report_WT_Module
+ * Class IndividualReportModule
  */
-class individual_report_WT_Module extends Report implements ModuleReportInterface {
+class IndividualReportModule extends Report implements ModuleReportInterface {
 	/** {@inheritdoc} */
 	public function getTitle() {
 		return /* I18N: Name of a module/report */ I18N::translate('Individual');

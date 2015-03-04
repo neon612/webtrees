@@ -16,18 +16,24 @@ namespace Fisharebest\Webtrees;
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/**
+ * Defined in session.php
+ *
+ * @global Tree $WT_TREE
+ */
+global $WT_TREE;
+
 define('WT_SCRIPT_NAME', 'report.php');
 require './includes/session.php';
 
 $controller = new PageController;
 
-$all_modules = Module::getActiveModules();
 $rep         = Filter::get('report');
 $rep_action  = Filter::get('action', 'choose|setup|run', 'choose');
-$output      = 'PDF';
+$module      = Module::getModuleByName($rep);
 
 $reports = array();
-foreach (Module::getActiveReports() as $r) {
+foreach (Module::getActiveReports($WT_TREE) as $r) {
 	$reports[$r->getName()] = $r->getTitle();
 }
 
@@ -41,7 +47,6 @@ case 'choose':
 	echo '<div id="report-page">
 		<form name="choosereport" method="get" action="report.php">
 		<input type="hidden" name="action" value="setup">
-		<input type="hidden" name="output" value="', Filter::escapeHtml($output), '">
 		<table class="facts_table width40">
 		<tr><td class="topbottombar" colspan="2">', I18N::translate('Choose a report to run'), '</td></tr>
 		<tr><td class="descriptionbox wrap width33 vmiddle">', I18N::translate('Report'), '</td>
@@ -55,8 +60,7 @@ case 'choose':
 	break;
 
 default:
-	if ($rep && array_key_exists($rep, $all_modules)) {
-		$module = $all_modules[$rep];
+	if ($module) {
 		$module->modAction($rep_action);
 	} else {
 		header('Location: ' . WT_BASE_URL);
