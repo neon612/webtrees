@@ -1722,17 +1722,42 @@ td.descriptionbox a {
 }
 
 /* Statistics block */
-.gedcom_stats_block table td {
-	vertical-align: top;
-}
-
-.gedcom_stats_block table td td {
+.stat-table1 {
+	display: table;
+	float: left;
+	width:15%;
+	border-collapse:separate;
+	border-spacing:2px;
 	vertical-align: middle;
 }
 
-.gedcom_stats_block td .stats_value {
-	text-align: center;
+[dir=rtl] .stat-table1 {
+float: right;
 }
+
+.stat-table2 {
+	display: table;
+	float: left;
+	width:60%;
+	border-collapse:separate;
+	border-spacing:2px;
+}
+
+[dir=rtl] .stat-table2 {
+float: right;
+}
+
+.stat-row {
+	display: table-row;
+}
+.stat-cell {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	white-space: pre-wrap;  
+}
+.left {text-align: left;}
+[dir=rtl] .left {text-align: right;}
 
 /* ==== Theme select block === */
 .theme_form ul {
@@ -3147,6 +3172,11 @@ table.table-census-assistant th {
 }
 
 /* ====== Charts Styles ======== */
+
+#people label {
+	display:block;
+}
+
 #compact_chart,
 #fan_chart,
 .chart_common,
@@ -3362,19 +3392,12 @@ table.table-census-assistant th {
 
 #pedigree_chart {
 	position: relative;
-	top: -200px;
-	left: 0;
-}
-
-[dir=rtl] #pedigree_chart {
-	left: auto;
-	right: 0;
+	margin: 20px auto;
 }
 
 #pedigree_canvas {
 	color: #81a9cb;
 	position: absolute;
-	top: 200px;
 	z-index: -1000;
 }
 
@@ -5161,14 +5184,12 @@ footer {
 		display: none;
 	}
 
-	#pedigree_chart {
-		left: -40px;
-		top:  -260px;
+	#pedigree-page h2 {
+		margin: 0;
 	}
 
-	[dir=rtl] #pedigree_chart {
-		left: auto;
-		right: -20px;
+	#pedigree_chart {
+		margin: 0 auto;
 	}
 
 	#header_accordion1 {

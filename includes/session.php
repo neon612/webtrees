@@ -64,6 +64,7 @@ if (getenv('USE_CDN')) {
 	define('WT_DATATABLES_BOOTSTRAP_JS_URL', '//cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js');
 	define('WT_FONT_AWESOME_CSS_URL', '//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.min.css');
 	define('WT_JQUERYUI_JS_URL', '//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js');
+	define('WT_JQUERYUI_TOUCH_PUNCH_URL', '//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js');
 	define('WT_JQUERY_COOKIE_JS_URL', '//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js');
 	define('WT_JQUERY_DATATABLES_JS_URL', '//cdnjs.cloudflare.com/ajax/libs/datatables/1.10.4/js/jquery.dataTables.min.js');
 	define('WT_JQUERY_JS_URL', '//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js');
@@ -80,6 +81,7 @@ if (getenv('USE_CDN')) {
 	define('WT_DATATABLES_BOOTSTRAP_JS_URL', WT_STATIC_URL . 'packages/datatables-1.10.4/plugins/dataTables.bootstrap.js');
 	define('WT_FONT_AWESOME_CSS_URL', WT_STATIC_URL . 'packages/font-awesome-4.3.0/css/font-awesome.min.css');
 	define('WT_JQUERYUI_JS_URL', WT_STATIC_URL . 'packages/jquery-ui-1.11.2/js/jquery-ui.min.js');
+	define('WT_JQUERYUI_TOUCH_PUNCH_URL', WT_STATIC_URL . 'packages/jqueryui-touch-punch-0.2.3/jquery.ui.touch-punch.min.js');
 	define('WT_JQUERY_COOKIE_JS_URL', WT_STATIC_URL . 'packages/jquery-cookie-1.4.1/jquery.cookie.js');
 	define('WT_JQUERY_DATATABLES_JS_URL', WT_STATIC_URL . 'packages/datatables-1.10.4/js/jquery.dataTables.min.js');
 	define('WT_JQUERY_JS_URL', WT_STATIC_URL . 'packages/jquery-1.11.2/jquery.min.js');
@@ -487,7 +489,7 @@ if ($WT_TREE) {
 
 // With no parameters, init() looks to the environment to choose a language
 define('WT_LOCALE', I18N::init());
-$WT_SESSION->locale = I18N::$locale;
+$WT_SESSION->locale = WT_LOCALE;
 
 if (empty($WEBTREES_EMAIL)) {
 	$WEBTREES_EMAIL = 'webtrees-noreply@' . preg_replace('/^www\./i', '', $_SERVER['SERVER_NAME']);
@@ -601,13 +603,3 @@ if (Auth::isSearchEngine() && !in_array(WT_SCRIPT_NAME, array(
 	echo '<p class="ui-state-error">', I18N::translate('You do not have permission to view this page.'), '</p>';
 	exit;
 }
-
-// These theme globals are horribly abused.
-$bwidth       = Theme::theme()->parameter('chart-box-x');
-$bheight      = Theme::theme()->parameter('chart-box-y');
-$basexoffset  = Theme::theme()->parameter('chart-offset-x');
-$baseyoffset  = Theme::theme()->parameter('chart-offset-y');
-$bxspacing    = Theme::theme()->parameter('chart-spacing-x');
-$byspacing    = Theme::theme()->parameter('chart-spacing-y');
-$Dbwidth      = Theme::theme()->parameter('chart-descendancy-box-x');
-$Dbheight     = Theme::theme()->parameter('chart-descendancy-box-y');

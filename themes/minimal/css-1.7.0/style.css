@@ -202,7 +202,7 @@ header form {
 
 .person_box_template .details0, 
 .person_box_template .details1 {
-    font-size: smaller;
+    font-size: 11px;
 }
 
 .person_box {
@@ -966,6 +966,11 @@ a.showit:hover > span {
 
 .person_box_template .chart_textbox {
 	overflow: hidden;
+	font-size: 12px;
+}
+
+.person_box_template .chart_textbox .name1{
+	line-height: 1;
 }
 
 .person_box_template img,
@@ -1721,17 +1726,42 @@ a.showit:hover > span {
 }
 
 /* Statistics block */
-.gedcom_stats_block table td {
-	vertical-align: top;
-}
-
-.gedcom_stats_block table td td {
+.stat-table1 {
+	display: table;
+	float: left;
+	width:15%;
+	border-collapse:separate;
+	border-spacing:2px;
 	vertical-align: middle;
 }
 
-.gedcom_stats_block td .stats_value {
-	text-align: center;
+[dir=rtl] .stat-table1 {
+float: right;
 }
+
+.stat-table2 {
+	display: table;
+	float: left;
+	width:60%;
+	border-collapse:separate;
+	border-spacing:2px;
+}
+
+[dir=rtl] .stat-table2 {
+float: right;
+}
+
+.stat-row {
+	display: table-row;
+}
+.stat-cell {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	white-space: pre-wrap;  
+}
+.left {text-align: left;}
+[dir=rtl] .left {text-align: right;}
 
 /* ==== Theme select block === */
 .theme_form ul {
@@ -2360,7 +2390,7 @@ dd .deletelink {
 	padding-bottom: 0;
 	margin-bottom: 0;
 	width: 98%;
-	overflow: auto;
+	overflow: visible;
 }
 
 [dir=rtl] #tabs {
@@ -3192,6 +3222,10 @@ table.table-census-assistant th {
 }
 
 /* ====== Charts Styles ======== */
+#people label {
+	display:block;
+}
+
 #compact_chart,
 #fan_chart,
 .chart_common,
@@ -3408,19 +3442,12 @@ table.table-census-assistant th {
 
 #pedigree_chart {
 	position: relative;
-	top: -200px;
-	left: 0;
-}
-
-[dir=rtl] #pedigree_chart {
-	left: auto;
-	right: 0;
+	margin: 20px auto;
 }
 
 #pedigree_canvas {
 	color: #555;
 	position: absolute;
-	top: 200px;
 	z-index: -1000;
 }
 
@@ -4406,18 +4433,16 @@ footer {
 		display: none;
 	}
 
-	#pedigree_chart {
-		left: -40px;
-		top:  -260px;
-	}
-
-	[dir=rtl] #pedigree_chart {
-		left: auto;
-		right: -20px;
-	}
-
 	#header_accordion1 {
 		width: 510px;
+	}
+
+	#pedigree-page h2 {
+		margin: 0;
+	}
+
+	#pedigree_chart {
+		margin: 0 auto;
 	}
 
 	#familybook_chart h3 {

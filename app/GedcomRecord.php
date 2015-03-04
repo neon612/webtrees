@@ -38,26 +38,27 @@ class GedcomRecord {
 	/** @var Fact[] facts extracted from $gedcom/$pending */
 	protected $facts;
 
-	/** @var bool Can we display details of this record to WT_PRIV_PUBLIC */
-	private   $disp_public;
+	/** @var boolean Can we display details of this record to WT_PRIV_PUBLIC */
+	private $disp_public;
 
-	/** @var bool Can we display details of this record to WT_PRIV_USER */
-	private   $disp_user;
+	/** @var boolean Can we display details of this record to WT_PRIV_USER */
+	private $disp_user;
 
-	/** @var bool Can we display details of this record to WT_PRIV_NONE */
-	private   $disp_none;
+	/** @var boolean Can we display details of this record to WT_PRIV_NONE */
+	private $disp_none;
 
 	/** @var string[][] All the names of this individual */
 	protected $_getAllNames;
 
-	/** @var int Cached result */
+	/** @var integer Cached result */
 	protected $_getPrimaryName;
 
-	/** @var int Cached result */
+	/** @var integer Cached result */
 	protected $_getSecondaryName;
 
 	// Allow getInstance() to return references to existing objects
 	private static $gedcom_record_cache;
+
 	// Fetch all pending edits in one database query
 	private static $pending_record_cache;
 
@@ -71,10 +72,10 @@ class GedcomRecord {
 	 * @param integer     $tree_id
 	 */
 	public function __construct($xref, $gedcom, $pending, $tree_id) {
-		$this->xref      = $xref;
-		$this->gedcom    = $gedcom;
-		$this->pending   = $pending;
-		$this->tree      = Tree::findById($tree_id);
+		$this->xref    = $xref;
+		$this->gedcom  = $gedcom;
+		$this->pending = $pending;
+		$this->tree    = Tree::findById($tree_id);
 
 		$this->parseFacts();
 	}
@@ -341,13 +342,7 @@ class GedcomRecord {
 	 * @return string
 	 */
 	private function getLinkUrl($link, $separator) {
-		if ($this->tree->getTreeId() == WT_GED_ID) {
-			return $link . $this->getXref() . $separator . 'ged=' . WT_GEDURL;
-		} elseif ($this->tree->getTreeId() == 0) {
-			return '#';
-		} else {
-			return $link . $this->getXref() . $separator . 'ged=' . rawurlencode(get_gedcom_from_id($this->tree->getTreeId()));
-		}
+		return $link . $this->getXref() . $separator . 'ged=' . $this->tree->getNameUrl();
 	}
 
 	/**
@@ -357,7 +352,7 @@ class GedcomRecord {
 	 *
 	 * @return boolean
 	 */
-	private function _canShow($access_level) {
+	private function canShowRecord($access_level) {
 		// This setting would better be called "$ENABLE_PRIVACY"
 		if (!$this->tree->getPreference('HIDE_LIVE_PEOPLE')) {
 			return true;
@@ -426,17 +421,17 @@ class GedcomRecord {
 		switch ($access_level) {
 		case WT_PRIV_PUBLIC: // visitor
 			if ($this->disp_public === null) {
-				$this->disp_public = $this->_canShow(WT_PRIV_PUBLIC);
+				$this->disp_public = $this->canShowRecord(WT_PRIV_PUBLIC);
 			}
 			return $this->disp_public;
 		case WT_PRIV_USER: // member
 			if ($this->disp_user === null) {
-				$this->disp_user = $this->_canShow(WT_PRIV_USER);
+				$this->disp_user = $this->canShowRecord(WT_PRIV_USER);
 			}
 			return $this->disp_user;
 		case WT_PRIV_NONE: // admin
 			if ($this->disp_none === null) {
-				$this->disp_none = $this->_canShow(WT_PRIV_NONE);
+				$this->disp_none = $this->canShowRecord(WT_PRIV_NONE);
 			}
 			return $this->disp_none;
 		case WT_PRIV_HIDE: // hidden from admins
@@ -540,7 +535,7 @@ class GedcomRecord {
 	 * @param string    $fact_type
 	 * @param Fact[] $facts
 	 */
-	protected function _extractNames($level, $fact_type, $facts) {
+	protected function extractNamesFromFacts($level, $fact_type, $facts) {
 		$sublevel    = $level + 1;
 		$subsublevel = $sublevel + 1;
 		foreach ($facts as $fact) {
@@ -747,7 +742,7 @@ class GedcomRecord {
 	 *
 	 * @return string
 	 */
-	public function format_list($tag = 'li', $find = false, $name = null) {
+	public function formatList($tag = 'li', $find = false, $name = null) {
 		if (is_null($name)) {
 			$name = $this->getFullName();
 		}
@@ -779,7 +774,7 @@ class GedcomRecord {
 	 *
 	 * @return string
 	 */
-	public function format_first_major_fact($facts, $style) {
+	public function formatFirstMajorFact($facts, $style) {
 		foreach ($this->getFacts($facts, true) as $event) {
 			// Only display if it has a date or place (or both)
 			if ($event->getDate()->isOK() || !$event->getPlace()->isEmpty()) {
@@ -1050,7 +1045,7 @@ class GedcomRecord {
 
 		if ($chan) {
 			// The record does have a CHAN event
-			$d = $chan->getDate()->MinDate();
+			$d = $chan->getDate()->minimumDate();
 			if (preg_match('/\n3 TIME (\d\d):(\d\d):(\d\d)/', $chan->getGedcom(), $match)) {
 				$t = mktime((int) $match[1], (int) $match[2], (int) $match[3], (int) $d->format('%n'), (int) $d->format('%j'), (int) $d->format('%Y'));
 			} elseif (preg_match('/\n3 TIME (\d\d):(\d\d)/', $chan->getGedcom(), $match)) {

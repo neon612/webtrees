@@ -630,7 +630,7 @@ function import_record($gedrec, Tree $tree, $update) {
 		list(,$xref, $type) = $match;
 		// check for a _UID, if the record doesn't have one, add one
 		if ($tree->getPreference('GENERATE_UIDS') && !strpos($gedrec, "\n1 _UID ")) {
-			$gedrec .= "\n1 _UID " . WT_Gedcom_Tag::createUid();
+			$gedrec .= "\n1 _UID " . GedcomTag::createUid();
 		}
 	} elseif (preg_match('/0 (HEAD|TRLR)/', $gedrec, $match)) {
 		$type = $match[1];
@@ -785,7 +785,7 @@ function update_places($gid, $ged_id, $gedrec) {
 			"INSERT INTO `##places` (p_place, p_parent_id, p_file, p_std_soundex, p_dm_soundex) VALUES (LEFT(?, 150), ?, ?, ?, ?)"
 		);
 		$sql_select_places = Database::prepare(
-			"SELECT p_id FROM `##places` WHERE p_file=? AND p_parent_id=? AND p_place=?"
+			"SELECT p_id FROM `##places` WHERE p_file = ? AND p_parent_id = ? AND p_place = LEFT(?, 150)"
 		);
 	}
 
@@ -812,7 +812,7 @@ function update_places($gid, $ged_id, $gedrec) {
 
 		foreach ($secalp as $place) {
 			$place = trim($place);
-			$key = strtolower($place . "_" . $parent_id);
+			$key = strtolower(mb_substr($place, 0, 150) . "_" . $parent_id);
 			//-- if this place has already been added then we don't need to add it again
 			if (isset($placecache[$key])) {
 				$parent_id = $placecache[$key];
@@ -873,9 +873,31 @@ function update_dates($xref, $ged_id, $gedrec) {
 				$fact = $tmatch[1];
 			}
 			$date = new Date($match[2]);
-			$sql_insert_date->execute(array($date->date1->d, $date->date1->format('%O'), $date->date1->m, $date->date1->y, $date->date1->minJD, $date->date1->maxJD, $fact, $xref, $ged_id, $date->date1->format('%@')));
-			if ($date->date2) {
-				$sql_insert_date->execute(array($date->date2->d, $date->date2->format('%O'), $date->date2->m, $date->date2->y, $date->date2->minJD, $date->date2->maxJD, $fact, $xref, $ged_id, $date->date2->format('%@')));
+			$sql_insert_date->execute(array(
+				$date->minimumDate()->d,
+				$date->minimumDate()->format('%O'),
+				$date->minimumDate()->m,
+				$date->minimumDate()->y,
+				$date->minimumDate()->minJD,
+				$date->minimumDate()->maxJD,
+				$fact,
+				$xref,
+				$ged_id,
+				$date->minimumDate()->format('%@'),
+			));
+			if ($date->minimumDate() !== $date->maximumDate()) {
+				$sql_insert_date->execute(array(
+					$date->maximumDate()->d,
+					$date->maximumDate()->format('%O'),
+					$date->maximumDate()->m,
+					$date->maximumDate()->y,
+					$date->maximumDate()->minJD,
+					$date->maximumDate()->maxJD,
+					$fact,
+					$xref,
+					$ged_id,
+					$date->maximumDate()->format('%@'),
+				));
 			}
 		}
 	}
