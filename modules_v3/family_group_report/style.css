@@ -1,0 +1,164 @@
+/**
+ * webtrees: online genealogy
+ * Copyright (C) 2015 webtrees development team
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+.report_section {
+	width: inherit;
+	border-collapse: collapse;
+	margin-top: 20pt;
+}
+
+.footnote_section {
+	width: inherit;
+	margin-top: 20pt;
+}
+
+.event_block {
+	width: 200pt;
+}
+
+.fact_block {
+	text-align: center;
+	width: 160pt;
+}
+
+.inner_fact_block {
+	text-align: right;
+	width: 30pt;
+}
+
+.header {
+	font-family: arial;
+	font-size: 18pt;
+	text-align: center;
+}
+
+.pageheader {
+	font-family: arial;
+	font-size: 14pt;
+	height: 28pt;
+}
+
+.genby, .now {
+	font-family: arial;
+	font-size: 8pt;
+	text-align: center;
+	width: inherit;
+	padding: 2pt;
+}
+
+.footnotenum {
+	font-family: arial;
+	font-size: 6pt;
+}
+
+.footnote, .pagenum {
+	font-family: arial;
+	font-size: 8pt;
+}
+
+.title {
+	font-family: arial;
+	font-size: 9pt;
+	font-weight: bold;
+	border: solid black 1pt;
+	width: inherit;
+	padding: 4pt;
+}
+
+.info {
+	border: solid black 1pt;
+	padding: 4pt;
+}
+
+.fact {
+	font-family: arial;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #000000;
+}
+
+.text, .date {
+	font-family: arial;
+	font-size: 9pt;
+	color: #000000;
+}
+
+.name {
+	font-family: arial;
+	font-size: 10pt;
+	font-weight: normal;
+	color: #000000;
+}
+
+#bodydiv div {
+	padding: 2pt;
+}
+
+/* Use Colors */
+/* Section Title Background Color */
+.sectionbox_bgcolor1 {
+	background-color: #9CA3D4;
+}
+
+/* Male Background Color */
+.malebox_bgcolor1, .Mbox_bgcolor1 {
+	background-color: #D6E0EA;
+}
+
+/* Female background Color */
+.femalebox_bgcolor1, .Fbox_bgcolor1 {
+	background-color: #E9DAF1;
+}
+
+/* Unknown Gender */
+.unknowngenderbox_bgcolor1, .Ubox_bgcolor1{
+	background-color: #FFFFFF;
+}
+
+/* Fact Boxes */
+.factbox_bgcolor1 {
+	background-color: #D1D9FF;
+}
+
+/* Text Color */
+.tcolor1 {
+	background-color: #000000;
+}
+
+/* DO NOT Use Colors */
+/* Section Title Background Color */
+.sectionbox_bgcolor0 {
+	background-color: #AAAAAA;
+}
+
+/* Male Background Color */
+.malebox_bgcolor0, .Mbox_bgcolor0 {
+}
+
+/* Female background Color */
+.femalebox_bgcolor0, .Fbox_bgcolor0 {
+}
+
+/* Unknown Gender */
+.unknowngenderbox_bgcolor0, .Ubox_bgcolor0 {
+}
+
+/* Fact Boxes */
+.factbox_bgcolor0 {
+}
+
+/* Text Color */
+.tcolor0 {
+}
